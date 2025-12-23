@@ -265,6 +265,12 @@ function editRecord(record: CloudflareDnsRecord) {
         ttl: record.ttl,
         proxied: record.proxied,
         autoTTL: record.ttl === 1,
+        priority: record?.priority,
+        data:{
+            port: record.data?.port,
+            weight: record.data?.weight,
+            target: record.data?.target,
+        },
     })
 
     getRecord.value.setRecord(record)

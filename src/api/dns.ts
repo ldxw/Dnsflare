@@ -18,7 +18,13 @@ export async function listZoneDnsRecord(
         method: 'get',
     })
 
-    return (objectToCamelCase(response.data) as any)
+    const data = objectToCamelCase(response.data) as APIResponse<CloudflareDnsRecord[]>
+
+    data.result?.forEach(record => {
+        record.zoneId = zoneId
+    })
+
+    return data
 }
 
 export function listZoneDnsRecordAll(zoneId: string): LoadPageFunc<CloudflareDnsRecord> {
